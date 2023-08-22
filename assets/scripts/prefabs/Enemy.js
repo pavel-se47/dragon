@@ -15,12 +15,33 @@ class Enemy extends MovableObject {
       y: data.y,
       texture: 'enemy',
       frame: `enemy${data.id}`,
+      id: data.id,
       velocity: -250,
       bullet: {
         delay: 1000,
         texture: 'bullet',
         velocity: -500,
       },
+      health:
+        data.id === 1
+          ? 3
+          : data.id === 2
+          ? 2
+          : data.id === 3
+          ? 1
+          : data.id === 4
+          ? 1
+          : null,
+      countLife:
+        data.id === 1
+          ? 3
+          : data.id === 2
+          ? 2
+          : data.id === 3
+          ? 1
+          : data.id === 4
+          ? 1
+          : null,
       origin: { x: 0, y: 0.5 },
     });
   }
@@ -28,7 +49,10 @@ class Enemy extends MovableObject {
   init(data) {
     super.init(data);
     this.setOrigin(data.origin.x, data.origin.y);
+    this.id = data.id;
     this.fires = data.fires || new Fires(this.scene);
+    this.health = data.health;
+    this.countLife = data.countLife;
     this.timer = this.scene.time.addEvent({
       delay: data.bullet.delay,
       loop: true,

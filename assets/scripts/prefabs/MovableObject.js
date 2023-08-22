@@ -16,6 +16,16 @@ class MovableObject extends Phaser.GameObjects.Sprite {
     this.x = x;
     this.y = y;
     this.setAlive(true);
+    this.countLife =
+      this.id === 1
+        ? 3
+        : this.id === 2
+        ? 2
+        : this.id === 3
+        ? 1
+        : this.id === 4
+        ? 1
+        : null;
   }
 
   isDead() {
